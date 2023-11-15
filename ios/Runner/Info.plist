@@ -65,9 +65,14 @@
       <string>fbapi</string>
       <string>fb-messenger-share-api</string>
     </array>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>This app needs access to location when open.</string>
-    <key>NSLocationAlwaysUsageDescription</key>
-    <string>This app needs access to location when in the background.</string>
+  
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>Need location when in use</string>
+  <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+  <string>Always and when in use!</string>
+  <key>NSLocationUsageDescription</key>
+  <string>Older devices need location.</string>
+  <key>NSLocationAlwaysUsageDescription</key>
+  <string>Can I haz location always?</string>
 </dict>
 </plist>
