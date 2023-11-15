@@ -75,10 +75,10 @@ class _LoginForm extends State<LoginForm> {
                       emailPwCredentials,
                       passwordHash:
                           _passwordTextEditorControler.text.toString().hashCode,
-                      goToHome: () {
+                      onLogin: () {
                         Navigator.pushReplacementNamed(context, '/home');
                       },
-                      snackBar: () {
+                      onError: () {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(const SnackBar(
                           content: Text('Credenciales invalidas'),

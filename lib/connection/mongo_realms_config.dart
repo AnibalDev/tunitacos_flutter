@@ -22,19 +22,19 @@ class MongoRealmsConfig {
     app = App(appConfig);
     authProvider = EmailPasswordAuthProvider(app);
   }
-  Future<void> login(Credentials cred,
-      {required Function goToHome,
-      required Function snackBar,
+  Future<void> login(Credentials credentials,
+      {required Function onLogin,
+      required Function onError,
       required int passwordHash}) async {
     try {
-      await app.logIn(cred);
+      await app.logIn(credentials);
       _passwordHash = passwordHash;
       _myId = app.currentUser?.id;
       _myEmail = app.currentUser?.profile.email;
       log("Log: the user id is : $_myId");
-      goToHome();
+      onLogin();
     } catch (e) {
-      snackBar();
+      onError();
     }
   }
 

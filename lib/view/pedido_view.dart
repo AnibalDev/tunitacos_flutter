@@ -32,12 +32,28 @@ class _PedidoViewState extends State<PedidoView> {
         ),
       ),
       body: provider.state == "Espera"
-          ? const Column(
-              children: [Text('Pedido en espera')],
+          ? Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Pedido en espera',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                ],
+              ),
             )
           : provider.state == "Atendiendo"
-              ? const Column(
-                  children: [Text('Pedido en proceso')],
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Pedido atendiendo',
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                    ],
+                  ),
                 )
               : provider.pedidoModel.tacosList.isEmpty
                   ? Center(
@@ -132,7 +148,7 @@ class _PedidoListItemState extends State<PedidoListItem> {
                             'Nombre: ',
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
-                          Text(widget.tm.nombre),
+                          Text(widget.tm.nombre ?? "Taco Default"),
                         ],
                       ),
                       Row(

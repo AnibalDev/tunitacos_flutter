@@ -38,7 +38,8 @@ class _HomeViewState extends State<HomeView> {
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.of(context).pushNamed('/create');
+            Navigator.of(context)
+                .pushNamed('/create', arguments: TacoModel.newTaco());
           },
           backgroundColor: MyColors.ternaryColor300,
           child: const Icon(Icons.add),
@@ -82,7 +83,7 @@ class _HomeViewState extends State<HomeView> {
                             return RefreshIndicator(
                               onRefresh: () => provider.fetchTacosData(),
                               child: StackedCardCarousel(
-                                spaceBetweenItems: 350,
+                                spaceBetweenItems: 400,
                                 pageController: _cartaPageControler,
                                 initialOffset: 100,
                                 items: provider.catalogoCarta

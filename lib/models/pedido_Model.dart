@@ -9,6 +9,7 @@ class PedidoModel {
   late String payMethod;
   late String? estado;
   late OwnerModel? cliente;
+  late String telefono;
 
   Map<String, dynamic> toMap() {
     return {
@@ -16,6 +17,7 @@ class PedidoModel {
       'Cliente': cliente?.toMap(),
       'Direccion': direccion,
       'PayMethod': payMethod,
+      'Telefono': telefono,
       'Estado': 'Espera'
     };
   }

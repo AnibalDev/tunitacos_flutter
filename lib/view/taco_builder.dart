@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tunitacos_flutter/components/widgets/ingredient_dropdown_widget.dart';
 import 'package:tunitacos_flutter/connection/mongo_realms_config.dart';
 import 'package:tunitacos_flutter/models/owner.dart';
+import 'package:tunitacos_flutter/models/taco.dart';
 import 'package:tunitacos_flutter/theme/colors.dart';
 import 'package:tunitacos_flutter/viewmodels/ingredient_viewmodel.dart';
 import 'package:tunitacos_flutter/viewmodels/pedido_viewmodel.dart';
@@ -21,9 +22,10 @@ class _TacoBuilderPlusUltraViewState extends State<TacoBuilderPlusUltraView> {
 
   @override
   Widget build(BuildContext context) {
+    final taco = ModalRoute.of(context)!.settings.arguments as TacoModel;
     final ingredientsvm = Provider.of<IngredientViewModel>(context);
-    final buildervm = Provider.of<TacoBuilderViewModel>(context);
     final pedidovm = Provider.of<PedidoViewModel>(context);
+    final buildervm = Provider.of<TacoBuilderViewModel>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -66,56 +68,56 @@ class _TacoBuilderPlusUltraViewState extends State<TacoBuilderPlusUltraView> {
                           ),
                           SizedBox(height: 12),
                           IngredienteDropDown(
-                            initial: buildervm.selectedTortilla,
+                            initial: taco.tortilla,
                             label: "Tortilla",
                             ingredientList: ingredientsvm.tortillasList,
                             callback: (value) {
                               setState(() {
-                                buildervm.selectedTaco.tortilla = value!;
+                                taco.tortilla = value!;
                               });
                             },
                           ),
                           SizedBox(height: 12),
                           IngredienteDropDown(
-                            initial: buildervm.selectedCarnes.firstOrNull,
+                            initial: taco.carnes.firstOrNull,
                             label: "Carne",
                             ingredientList: ingredientsvm.carnesList,
                             callback: (value) {
                               setState(() {
-                                buildervm.selectedTaco.carnes.add(value!);
+                                taco.carnes.add(value!);
                               });
                             },
                           ),
                           SizedBox(height: 12),
                           IngredienteDropDown(
-                            initial: buildervm.selectedPicadillos.firstOrNull,
+                            initial: taco.picadillos.firstOrNull,
                             label: "Picadillo",
                             ingredientList: ingredientsvm.picadillosList,
                             callback: (value) {
                               setState(() {
-                                buildervm.selectedTaco.picadillos.add(value!);
+                                taco.picadillos.add(value!);
                               });
                             },
                           ),
                           SizedBox(height: 12),
                           IngredienteDropDown(
-                            initial: buildervm.selectedSalsas.firstOrNull,
+                            initial: taco.salsas.firstOrNull,
                             label: "Salsa",
                             ingredientList: ingredientsvm.salsasList,
                             callback: (value) {
                               setState(() {
-                                buildervm.selectedTaco.salsas.add(value!);
+                                taco.salsas.add(value!);
                               });
                             },
                           ),
                           SizedBox(height: 12),
                           IngredienteDropDown(
-                            initial: buildervm.selectedOtros.firstOrNull,
+                            initial: taco.otros.firstOrNull,
                             label: "Otros",
                             ingredientList: ingredientsvm.otrosList,
                             callback: (value) {
                               setState(() {
-                                buildervm.selectedTaco.otros.add(value!);
+                                taco.otros.add(value!);
                               });
                             },
                           ),
@@ -132,8 +134,9 @@ class _TacoBuilderPlusUltraViewState extends State<TacoBuilderPlusUltraView> {
                                       backgroundColor:
                                           MyColors.ternaryColor300),
                                   onPressed: () {
+                                    taco.nombre = _nombreController.text;
                                     pedidovm.ingresarTaco(
-                                      buildervm.selectedTaco
+                                      taco
                                         ..baseValue = 100
                                         ..owner = OwnerModel(
                                             ownerId: MongoRealmsConfig().myId,
@@ -180,7 +183,7 @@ class _TacoBuilderPlusUltraViewState extends State<TacoBuilderPlusUltraView> {
                                     IconButton(
                                         onPressed: () {
                                           buildervm.shareTaco(
-                                            buildervm.selectedTaco
+                                            taco
                                               ..baseValue = 100
                                               ..owner = OwnerModel(
                                                   ownerId:
@@ -196,8 +199,9 @@ class _TacoBuilderPlusUltraViewState extends State<TacoBuilderPlusUltraView> {
                                         icon: const Icon(Icons.share)),
                                     IconButton(
                                         onPressed: () {
+                                          taco.nombre = _nombreController.text;
                                           buildervm.shareTaco(
-                                            buildervm.selectedTaco
+                                            taco
                                               ..baseValue = 100
                                               ..owner = OwnerModel(
                                                   ownerId:

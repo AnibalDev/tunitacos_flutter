@@ -2,8 +2,7 @@ import 'package:tunitacos_flutter/models/ingredient.dart';
 import 'package:tunitacos_flutter/models/owner.dart';
 
 class TacoModel {
-  //TODO agregar url
-  late String nombre;
+  String? nombre;
   IngredientModel? tortilla;
   List<IngredientModel?> carnes = [];
   List<IngredientModel?> picadillos = [];
@@ -13,7 +12,7 @@ class TacoModel {
   late int baseValue;
   late OwnerModel owner;
   late String? uri;
-  late int cantidad;
+  int cantidad = 1;
 
   int get precio {
     return tortilla!.precio +
@@ -50,7 +49,6 @@ class TacoModel {
       this.uri});
 
   factory TacoModel.fromMap(Map<String, dynamic> map) {
-    //if(map.containsKey(key))
     return TacoModel(
       uri: map['Uri'] as String?,
       nombre: map['Nombre'] as String,
@@ -83,10 +81,10 @@ class TacoModel {
       'Nombre': nombre,
       'Tortilla': tortilla!.toMap(),
       'Carnes': carnes.map((e) => e?.toMap()).toList(),
-      if (picadillos.length < 1)
-        'Picadillos': otros.map((e) => e?.toMap()).toList(),
-      if (salsas.length < 1) 'Salsas': otros.map((e) => e?.toMap()).toList(),
-      if (otros.length < 1) 'Otros': otros.map((e) => e?.toMap()).toList(),
+      if (picadillos.isNotEmpty)
+        'Picadillos': picadillos.map((e) => e?.toMap()).toList(),
+      if (salsas.isNotEmpty) 'Salsas': salsas.map((e) => e?.toMap()).toList(),
+      if (otros.isNotEmpty) 'Otros': otros.map((e) => e?.toMap()).toList(),
       'Precio': baseValue < precio ? precio : baseValue,
       'Owner': owner.toMap(),
     };

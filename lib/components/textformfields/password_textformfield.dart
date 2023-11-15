@@ -30,17 +30,18 @@ class _TextFormFieldCustomState extends State<PasswordTexFormField> {
         validator: widget.callback,
         controller: widget.controller,
         decoration: InputDecoration(
-            label: Text(widget.text),
-            prefixIcon: const Icon(Icons.vpn_key),
-            iconColor: Colors.white,
-            prefixIconColor: MyColors.ternaryColor300,
-            suffixIcon: IconButton(
-                icon: _suffixIcon,
-                onPressed: () {
-                  setState(() {
-                    _isObscured = !_isObscured;
-                  });
-                })),
+          label: Text(widget.text),
+          prefixIcon: const Icon(Icons.vpn_key),
+          iconColor: Colors.white,
+          prefixIconColor: MyColors.ternaryColor300,
+          suffixIcon: IconButton(
+              icon: _suffixIcon,
+              onPressed: () {
+                setState(() {
+                  _isObscured = !_isObscured;
+                });
+              }),
+        ),
       ),
     );
   }

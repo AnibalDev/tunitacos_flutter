@@ -60,10 +60,10 @@ class _LoginForm extends State<NewAccountForm> {
                     MongoRealmsConfig().login(
                       emailPwCredentials,
                       passwordHash: _passwordTextEditorControler.text.hashCode,
-                      goToHome: () {
+                      onLogin: () {
                         Navigator.pushNamed(context, '/home');
                       },
-                      snackBar: () {},
+                      onError: () {},
                     );
                   }
                 },

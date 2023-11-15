@@ -15,6 +15,7 @@ class TacoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final buildervm = Provider.of<TacoBuilderViewModel>(context);
     final pedidovm = Provider.of<PedidoViewModel>(context);
+    double c_width = MediaQuery.of(context).size.width * 0.8;
     return Padding(
       padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0),
       child: Card(
@@ -35,7 +36,7 @@ class TacoCard extends StatelessWidget {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      taco.nombre,
+                      taco.nombre!,
                       style: GoogleFonts.poppins(
                           color: MyColors.secondaryColor700, fontSize: 24),
                     ),
@@ -69,8 +70,8 @@ class TacoCard extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).pushNamed('/create');
-                      buildervm.setTaco = taco;
+                      Navigator.of(context)
+                          .pushNamed('/create', arguments: taco);
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: MyColors.ternaryColor200,
@@ -148,9 +149,12 @@ class TextRow extends StatelessWidget {
             Text(title,
                 style: GoogleFonts.poppins(
                     fontSize: 20, fontWeight: FontWeight.w500)),
-            Text(content,
-                style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.w200, fontSize: 20)),
+            Expanded(
+              child: Text(content,
+                  overflow: TextOverflow.ellipsis,
+                  style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w200, fontSize: 20)),
+            ),
           ],
         ),
       ),

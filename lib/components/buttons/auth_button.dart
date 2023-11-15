@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:tunitacos_flutter/theme/colors.dart';
 
 class AuthButton extends StatelessWidget {
@@ -16,7 +17,21 @@ class AuthButton extends StatelessWidget {
               ),
               side: BorderSide(color: MyColors.primaryColor700),
               backgroundColor: MyColors.primaryColor100),
-          onPressed: () {},
+          onPressed: () async {
+            final LoginResult result = await FacebookAuth.instance.login(
+                permissions: [
+                  'email'
+                ]); // by default we request the email and the public profile
+// or FacebookAuth.i.login()
+            if (result.status == LoginStatus.success) {
+              // you are logged
+              final AccessToken accessToken = result.accessToken!;
+              Navigator.pushReplacementNamed(context, '/home');
+            } else {
+              print(result.status);
+              print(result.message);
+            }
+          },
           child: Row(
             children: [
               ClipRRect(
